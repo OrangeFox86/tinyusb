@@ -59,6 +59,7 @@ void     tud_vendor_n_read_flush      (uint8_t itf);
 uint32_t tud_vendor_n_write           (uint8_t itf, void const* buffer, uint32_t bufsize);
 uint32_t tud_vendor_n_write_flush     (uint8_t itf);
 uint32_t tud_vendor_n_write_available (uint8_t itf);
+uint32_t tud_vendor_n_write_clear(uint8_t idx);
 
 TU_ATTR_ALWAYS_INLINE static inline uint32_t tud_vendor_n_write_str (uint8_t itf, char const* str);
 
@@ -108,6 +109,10 @@ TU_ATTR_ALWAYS_INLINE static inline uint32_t tud_vendor_write_flush(void) {
 #if CFG_TUD_VENDOR_TX_BUFSIZE > 0
 TU_ATTR_ALWAYS_INLINE static inline uint32_t tud_vendor_write_available(void) {
  return tud_vendor_n_write_available(0);
+}
+
+TU_ATTR_ALWAYS_INLINE static inline uint32_t tud_vendor_write_clear(void) {
+  return tud_vendor_n_write_clear(0);
 }
 #endif
 
