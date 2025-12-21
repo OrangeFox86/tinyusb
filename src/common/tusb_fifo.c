@@ -906,23 +906,6 @@ bool tu_fifo_clear(tu_fifo_t *f)
   return true;
 }
 
-
-// synchronously count then clear fifo, returning the count
-uint16_t tu_fifo_count_and_clear(tu_fifo_t *f) {
-  _ff_lock(f->mutex_wr);
-  _ff_lock(f->mutex_rd);
-
-  uint16_t cnt = tu_fifo_count(f);
-
-  f->rd_idx = 0;
-  f->wr_idx = 0;
-
-  _ff_unlock(f->mutex_wr);
-  _ff_unlock(f->mutex_rd);
-
-  return cnt;
-}
-
 /******************************************************************************/
 /*!
     @brief Change the fifo mode to overwritable or not overwritable
